@@ -1,0 +1,11 @@
+{
+    "name":         "DouchVibe",
+    "description":  "Enables using Couchdb use in Vibe.d",
+    "authors":      ["Isak Andersson"],
+    "copyright":    "Copyright (c) 2013 Isak Andersson",
+    "license":      "Zlib/libpng",
+    "version":      "0.0.1",
+    "dependencies": {
+        "vibe-d":   "~master"
+    }
+}
