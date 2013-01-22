@@ -12,9 +12,5 @@ import douchvibe.client;
 
 static this() {
    auto client = new CouchClient(); // Automatically fetches default localhost settings
-   auto test_db = client.getDB("dogs"); // Gets the database, creates it if it doesn't exist
-   auto test_document = test_db.createDocument();
-   test_document.setValue("Larry", "Sausage dog");
-   test_document.setValue("Murray", "Huskys");
-   test_db.save(test_document);
+   auto dog_db = client["dogs"]; // Fetches the dogs database, if it doesn't exist it's initialized automatically
 }
