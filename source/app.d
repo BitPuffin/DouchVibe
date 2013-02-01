@@ -8,7 +8,7 @@
 
 import vibe.d;
 
-import douchvibe.douchvibe.db;
+import douchvibe.db;
 
 static this() {
     auto db = Database.get("foo");  // Gets the foo db and initializes it if it doesn't exist, using default port and host

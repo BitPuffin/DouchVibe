@@ -11,7 +11,9 @@ class Server {
 }
 
 class Database {
+}
 
+class Document {
 }
 
 class RestClient {
@@ -67,7 +69,7 @@ class RestClient {
 
     private:
         auto parsePath(string path) {
-            return Url.parse(url_http_signature ~ host ~ ":" ~ to!string(port) ~ "/" path);
+            return Url.parse(url_http_signature ~ host ~ ":" ~ to!string(port) ~ "/" ~ path);
         }
 
         auto commonGet(Url url) {
