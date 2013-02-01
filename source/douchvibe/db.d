@@ -35,24 +35,33 @@ class RestClient {
 
         // Do a GET request at the specified path and return a Json object
         Json get(string path) {
-            client.connect();
             Url url = parsePath(path);
+            
+            client.connect(url.host, url.port, ssl);
+
             auto response = commonGet(url);
             auto json = response.readJson();
+
             client.disconnect();
+
             return json;
         }
         
         // Don't parse JSON just get the raw data
         ubyte[] getRaw(string path) {
-            client.connect(url.host, url.port, ssl);
             Url url = parsePath(path);
+
+            client.connect(url.host, url.port, ssl);
+
             auto response = commonGet(url);
             response.lockedConnection = client;
             response.bodyReader = response.bodyReader; // Not sure why/if necessary, vibe did it though
+
             ubyte[] data;
             response.bodyReader.read(data);
+
             client.disconnect();
+
             return data;
         }
 
