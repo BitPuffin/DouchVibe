@@ -6,7 +6,5 @@
     "license":      "Zlib/libpng",
     "version":      "0.0.1",
     "dependencies": {
-        "vibe-d":   "~master",
-        "dub": ">=0.9.1"
     }
 }
