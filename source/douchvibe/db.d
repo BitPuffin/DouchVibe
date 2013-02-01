@@ -44,6 +44,7 @@ class RestClient {
             response.bodyReader = response.bodyReader; // Not sure why/if necessary, vibe did it though
             ubyte[] data;
             response.bodyReader.read(data);
+            client.disconnect();
             return data;
         }
 
