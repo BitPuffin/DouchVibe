@@ -1,5 +1,7 @@
 module douchvibe.db;
 
+import std.conv;
+
 import vibe.http.client;
 import vibe.data.json;
 import vibe.inet.url;
@@ -33,13 +35,19 @@ class RestClient {
 
         // Do a GET request at the specified path and return a Json object
         Json get(string path) {
-
+            client.connect();
+            Url url = parsePath(path);
+            auto response = commonGet(url);
+            auto json = response.readJson();
+            client.disconnect();
+            return json;
         }
         
         // Don't parse JSON just get the raw data
         ubyte[] getRaw(string path) {
             client.connect(url.host, url.port, ssl);
-            auto response = commonGet(path);
+            Url url = parsePath(path);
+            auto response = commonGet(url);
             response.lockedConnection = client;
             response.bodyReader = response.bodyReader; // Not sure why/if necessary, vibe did it though
             ubyte[] data;
@@ -49,8 +57,11 @@ class RestClient {
         }
 
     private:
-        auto commonGet(string path) {
-            Url url = Url.parse(url_http_signature ~ host ~ ":" ~ "/" ~ path);
+        auto parsePath(string path) {
+            return Url.parse(url_http_signature ~ host ~ ":" ~ to!string(port) ~ "/" path);
+        }
+
+        auto commonGet(Url url) {
             return client.request( (req) {
                 req.requestUrl = url.localURI;
                 req.headers["Host"] = url.host;
