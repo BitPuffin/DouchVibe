@@ -1,9 +1,0 @@
-{
-"Version": 1,
-"Files": {
-	"source/": "Directory",
-	"package.json": "RegularFile",
-	"source/app.d": "RegularFile",
-	"journal.json": "RegularFile"
-}
-}
